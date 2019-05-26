@@ -244,7 +244,16 @@ nav {
   }
 }
 
-.copyright {
-  font-size: .75rem;
+.footer-content {
   float: right;
+  font-size: .75rem;
+  
+  a {
+    text-decoration: underline;
+  }
+}
+
+.copyright {
+  border-right: 1px solid #c0c5ce;
+  padding-right: 4px;
 }
