@@ -1,0 +1,24 @@
+<div *ngIf="selectedPersonality">
+  <div class="box" [style.height.px]="height">
+    <div [className]="transitioning ? 'fade-out box-content' : 'fade-in box-content'">
+      <h3>{{selectedPersonality.title}}</h3>
+      <p *ngIf="selectedPersonality.warning" class="warning">{{selectedPersonality.warning}}</p>
+      <p>{{selectedPersonality.description}}</p>
+    </div>
+  </div>
+
+  <br/>
+</div>
+
+<div class="box">
+  <h3 *ngIf="selectedPersonality; else elseBlock">The other types</h3>
+  <ng-template #elseBlock><h3>The four types</h3></ng-template>
+
+  <nav>
+    <ng-container *ngFor="let personality of personalities">
+  	  <a *ngIf="personality != selectedPersonality" routerLink="/results/{{personality.value}}">
+  	   {{personality.title}}
+  	  </a>
+    </ng-container>
+  </nav>
+</div>

@@ -1,0 +1,26 @@
+<div @enterQuiz *ngIf="selectedQuestion" class="question-container">
+  <div class="box" [style.height.px]="height">
+    <div [className]="transitioning ? 'fade-out box-content' : 'fade-in box-content'">
+      <h3>{{selectedQuestion.text}}</h3>
+      <div *ngFor="let answer of selectedQuestion.answers">
+        <label>
+          <input type="radio" [(ngModel)]="selectedQuestion.selection" value="{{answer.value}}" name="personality" /> 
+  	      <span>{{answer.label}}</span>
+  	    </label>
+  	  </div>
+    </div>
+  </div>
+
+  <button *ngIf="(questions.indexOf(selectedQuestion) < questions.length - 1) && selectedQuestion.selection" 
+    class="button" (click)="getNextQuestion()">Proceed</button>
+  <button *ngIf="(questions.indexOf(selectedQuestion) == questions.length - 1) && selectedQuestion.selection" 
+    class="button" (click)="getResults()">Submit</button>
+</div>
+
+<div *ngIf="selectedQuestion">
+  <div class="progress-bar" role="progressbar" 
+      [attr.aria-valuenow]="(questions.indexOf(selectedQuestion) + 1)" 
+      aria-valuemin="1" [attr.aria-valuemax]="questions.length">
+    <div [style.width.%]="(questions.indexOf(selectedQuestion) + 1) / questions.length * 100"></div>
+  </div>
+</div>
